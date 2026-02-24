@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Package {
+  id          String   @id @default(cuid())
+  nameEs      String
+  nameEn      String
+  namePt      String
+  durationEs  String
+  durationEn  String
+  durationPt  String
+  price       String
+  descriptionEs String
+  descriptionEn String
+  descriptionPt String
+  includesEs  String[] // Array of strings
+  includesEn  String[]
+  includesPt  String[]
+  featured    Boolean  @default(false)
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  name       String
+  location   String
+  textEs     String
+  textEn     String
+  textPt     String
+  rating     Int      @default(5)
+  active     Boolean  @default(true)
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Hotel {
+  id            String   @id @default(cuid())
+  name          String
+  imageUrl      String
+  location      String
+  descriptionEs String
+  descriptionEn String
+  descriptionPt String
+  rating        String
+  priceRange    String
+  link          String?
+  active        Boolean  @default(true)
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Recommendation {
+  id            String   @id @default(cuid())
+  titleEs       String
+  titleEn       String
+  titlePt       String
+  descriptionEs String
+  descriptionEn String
+  descriptionPt String
+  icon          String   @default("Compass") // Lucide icon name
+  category      String   @default("general")
+  active        Boolean  @default(true)
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model GalleryImage {
+  id        String   @id @default(cuid())
+  imageUrl  String
+  altText   String
+  span      String   @default("") // CSS grid span class
+  order     Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
